@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn New Repertoire Faster — Start Here Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Trirong:ital,wght@0,300;0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* =========================================
+   LNRF BRAND TOKENS
+   ========================================= */
+:root {
+  --sage:          #A8B880;
+  --sage-dark:     #78A030;
+  --sage-tint:     #E4E8CC;
+  --rose:          #E86078;
+  --rose-hot:      #E83C88;
+  --charcoal:      #283040;
+  --charcoal-mid:  #3a4a5a;
+  --blush:         #FFEEF6;
+  --mist:          #F4FCFE;
+  --paper:         #F8F8F8;
+  --text-body:     #3a4252;
+  --text-muted:    #5a6478;
+  --white:         #ffffff;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Trirong', Georgia, serif;
+  background: var(--paper);
+  color: var(--charcoal);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* =========================================
+   BOTANICAL LAYER — VISIBLE & ANIMATED
+   ========================================= */
+.botanical-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bot-cluster { position: absolute; }
+.bot-cluster.tl { top: -15px; left: -15px; }
+.bot-cluster.tr { top: -15px; right: -15px; }
+.bot-cluster.bl { bottom: -15px; left: -15px; }
+.bot-cluster.br { bottom: -15px; right: -15px; }
+.bot-cluster.mc { top: 40%; left: -40px; }
+.bot-cluster.mr { top: 35%; right: -40px; }
+
+@keyframes floatLeaf {
+  0%   { transform: translateY(0)    rotate(0deg)   scale(1); }
+  25%  { transform: translateY(-18px) rotate(5deg)  scale(1.04); }
+  50%  { transform: translateY(-8px)  rotate(-3deg) scale(1.02); }
+  75%  { transform: translateY(-22px) rotate(7deg)  scale(1.05); }
+  100% { transform: translateY(0)    rotate(0deg)   scale(1); }
+}
+@keyframes swayLeaf {
+  0%,100% { transform: rotate(-8deg) translateY(0); }
+  33%     { transform: rotate(6deg)  translateY(-12px); }
+  66%     { transform: rotate(-4deg) translateY(-6px); }
+}
+
+.bot-cluster svg { animation: floatLeaf 11s ease-in-out infinite; }
+.bot-cluster.tr svg { animation: floatLeaf 13s ease-in-out infinite; animation-delay: 2s; }
+.bot-cluster.bl svg { animation: swayLeaf 15s ease-in-out infinite; animation-delay: 4s; }
+.bot-cluster.br svg { animation: floatLeaf 12s ease-in-out infinite; animation-delay: 1s; }
+.bot-cluster.mc svg { animation: swayLeaf 16s ease-in-out infinite; animation-delay: 6s; }
+.bot-cluster.mr svg { animation: floatLeaf 14s ease-in-out infinite; animation-delay: 3s; }
+
+/* =========================================
+   HEADER
+   ========================================= */
+.site-header {
+  background: var(--white);
+  border-bottom: 2px solid var(--sage-tint);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.header-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.header-text { flex: 1; }
+.logo-img { width: 220px; height: auto; display: block; margin-bottom: 6px; }
+.logo-badge { display: block; }
+.header-sub {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* =========================================
+   PIANO ILLUSTRATION
+   ========================================= */
+.piano-wrap {
+  flex-shrink: 0;
+  width: 260px;
+  animation: floatLeaf 10s ease-in-out infinite;
+}
+.piano-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .header-inner { flex-direction: column; text-align: center; }
+  .piano-wrap { width: 200px; }
+  .logo-badge { margin: 0 auto; }
+}
+
+/* =========================================
+   TAB NAVIGATION
+   ========================================= */
+.tab-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--charcoal);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: 0 3px 14px rgba(40,48,64,0.22);
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  flex: 1;
+  min-width: 110px;
+  padding: 15px 10px;
+  border: none;
+  background: transparent;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+}
+.tab-btn:hover { color: var(--sage); background: rgba(168,184,128,0.08); }
+.tab-btn.active { color: var(--sage); border-bottom-color: var(--sage); background: rgba(168,184,128,0.1); }
+
+/* =========================================
+   TAB PANELS
+   ========================================= */
+.tab-panel {
+  display: none;
+  position: relative;
+  z-index: 1;
+  animation: panelIn 0.35s ease forwards;
+}
+.tab-panel.active { display: block; }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#panel-start { background: var(--paper); }
+#panel-what  { background: var(--mist); }
+#panel-prize { background: var(--blush); }
+#panel-piece { background: var(--paper); }
+#panel-ok    { background: var(--sage-tint); }
+
+.panel-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* =========================================
+   TYPOGRAPHY
+   ========================================= */
+h1 { font-family: 'Cinzel', serif; }
+h2, h3, h4 { font-family: 'Source Sans Pro', sans-serif; }
+
+.eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.panel-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: var(--charcoal);
+  line-height: 1.2;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.panel-title em { font-style: italic; color: var(--rose); }
+
+.panel-subtitle {
+  font-family: 'Trirong', serif;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 32px;
+  line-height: 1.55;
+}
+
+.body-text {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--text-body);
+  margin-bottom: 16px;
+}
+
+h2.section-head {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--sage-tint);
+}
+
+/* =========================================
+   DIVIDER
+   ========================================= */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 36px 0;
+  color: var(--sage);
+  font-size: 0.9rem;
+  opacity: 0.55;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--sage-tint);
+}
+
+/* =========================================
+   STEP CARDS
+   ========================================= */
+.steps-stack { display: grid; gap: 14px; margin: 28px 0; }
+
+.step-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  border: 1px solid var(--sage-tint);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.step-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(168,184,128,0.18);
+  border-color: var(--sage);
+}
+
+.step-num {
+  width: 44px; height: 44px; min-width: 44px;
+  background: var(--charcoal);
+  color: var(--sage);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.step-body h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: var(--charcoal);
+}
+.step-body p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+
+.tracker-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.tracker-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--sage-tint);
+  border: 1px solid var(--sage);
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--sage-dark);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.tracker-link:hover { background: var(--sage); color: var(--white); }
+
+.tracker-link.secondary {
+  background: var(--white);
+  border-color: var(--sage-tint);
+  color: var(--text-muted);
+}
+.tracker-link.secondary:hover { background: var(--sage-tint); color: var(--charcoal); border-color: var(--sage); }
+
+.piece-note {
+  background: var(--mist);
+  border-left: 3px solid var(--sage);
+  border-radius: 0 10px 10px 0;
+  padding: 12px 18px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 16px;
+}
+.piece-note button {
+  background: none;
+  border: none;
+  color: var(--sage-dark);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* =========================================
+   WEEK 1 ROADMAP
+   ========================================= */
+.roadmap-block {
+  background: var(--sage-tint);
+  border-radius: 16px;
+  padding: 28px;
+  margin: 28px 0;
+}
+.roadmap-block h3 { font-size: 1.1rem; margin-bottom: 4px; font-weight: 700; }
+.roadmap-sub { font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-bottom: 20px; font-family: 'Trirong', serif; }
+
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 10px;
+}
+
+.day-pill {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 3px solid var(--sage);
+}
+.day-pill .dn { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; color: var(--sage); line-height: 1; min-width: 22px; }
+.day-pill .dl { font-family: 'Source Sans Pro', sans-serif; font-size: 0.82rem; color: var(--text-body); line-height: 1.3; }
+
+.days-later {
+  background: var(--charcoal);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+}
+.days-later strong { color: var(--sage); }
+
+/* =========================================
+   QUICK NAV
+   ========================================= */
+.quick-nav {
+  background: var(--white);
+  border: 1px solid var(--sage-tint);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-top: 36px;
+}
+.nav-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.nav-chip {
+  background: var(--sage-tint);
+  border: 1px solid var(--sage);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-chip:hover { background: var(--sage); color: var(--white); border-color: var(--sage); }
+
+/* =========================================
+   ANALOGY CARD
+   ========================================= */
+.analogy-card {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 30px;
+  margin: 28px 0;
+  border: 1px solid var(--sage);
+  position: relative;
+  overflow: hidden;
+}
+.analogy-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sage), var(--rose), var(--sage));
+}
+
+.analogy-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.analogy-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.analogy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+.analogy-item {
+  text-align: center;
+  padding: 18px 10px;
+  background: var(--blush);
+  border-radius: 12px;
+  border-top: 3px solid var(--rose);
+}
+.a-icon  { font-size: 2rem; margin-bottom: 8px; line-height: 1; }
+.a-term  { font-family: 'Source Sans Pro', sans-serif; font-size: 0.88rem; color: var(--rose); font-weight: 700; margin-bottom: 5px; }
+.a-def   { font-size: 0.78rem; color: var(--text-body); line-height: 1.45; }
+
+/* =========================================
+   COVERS GRID
+   ========================================= */
+.covers-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 24px 0;
+}
+.covers-box {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid var(--sage-tint);
+}
+.covers-box.yes { border-top: 4px solid var(--sage); }
+.covers-box.not { border-top: 4px solid var(--text-muted); }
+
+.covers-label {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: block;
+}
+.covers-box.yes .covers-label { color: var(--sage-dark); }
+.covers-box.not .covers-label { color: var(--text-muted); }
+
+.item-list { list-style: none; }
+.item-list li {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--sage-tint);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.45;
+}
+.item-list li:last-child { border-bottom: none; }
+.item-list li .mk { font-weight: 700; min-width: 16px; margin-top: 1px; }
+.covers-box.yes .mk { color: var(--sage); }
+.covers-box.not .mk { color: var(--text-muted); opacity: 0.7; }
+
+/* =========================================
+   PILLARS
+   ========================================= */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 22px 0;
+}
+.pillar-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid rgba(168,184,128,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pillar-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(168,184,128,0.18); }
+.pillar-icon { font-size: 1.7rem; margin-bottom: 10px; line-height: 1; }
+.pillar-name {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pillar-name::after { content: ''; flex: 1; height: 1px; background: var(--sage); opacity: 0.4; }
+.pillar-desc { font-size: 0.88rem; color: var(--text-body); line-height: 1.6; margin: 0; }
+
+/* =========================================
+   PRIZE SECTION
+   ========================================= */
+.prize-intro { text-align: center; margin-bottom: 28px; }
+.prize-script { font-family: 'Trirong', serif; font-size: 1.25rem; font-style: italic; color: var(--rose); display: block; margin-bottom: 4px; }
+
+.prize-card-new {
+  background: var(--charcoal);
+  border-radius: 16px;
+  padding: 28px 24px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 20px;
+}
+.prize-card-new-text { flex: 1; }
+.prize-tag {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  display: block;
+  margin-bottom: 12px;
+}
+.prize-card-new h3 { font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 700; line-height: 1.3; margin-bottom: 12px; color: var(--white); }
+.prize-steps-list { list-style: none; }
+.prize-steps-list li {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  gap: 10px;
+  line-height: 1.4;
+}
+.prize-steps-list li:last-child { border-bottom: none; }
+.sn { font-family: 'Source Sans Pro', sans-serif; font-size: 0.75rem; font-weight: 700; opacity: 0.45; min-width: 16px; }
+.prize-medallion-sm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+.prize-big-sm  { font-family: 'Source Sans Pro', sans-serif; font-size: 1.1rem; font-weight: 700; line-height: 1; }
+.prize-small-sm{ font-size: 0.52rem; letter-spacing: 0.05em; opacity: 0.65; margin-top: 2px; }
+
+.prize-card-existing {
+  background: linear-gradient(135deg, var(--rose) 0%, #c84060 100%);
+  border-radius: 20px;
+  padding: 44px 40px;
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.prize-card-existing::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.prize-card-existing::after {
+  content: '';
+  position: absolute;
+  bottom: -50px; left: -30px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.prize-card-existing .prize-tag { font-size: 1.1rem; font-weight: 700; opacity: 0.85; margin-bottom: 14px; }
+.prize-card-existing h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  color: var(--white);
+}
+.prize-card-existing p {
+  font-size: 1rem;
+  opacity: 0.88;
+  margin-bottom: 28px;
+  line-height: 1.65;
+  position: relative;
+}
+.prize-medallion-lg {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.12);
+  position: relative;
+}
+.prize-big-lg  { font-family: 'Source Sans Pro', sans-serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+.prize-small-lg{ font-size: 0.65rem; letter-spacing: 0.08em; opacity: 0.75; margin-top: 4px; }
+
+/* =========================================
+   STREAK RULES
+   ========================================= */
+.streak-box {
+  background: var(--sage-tint);
+  border-radius: 16px;
+  padding: 30px;
+  margin: 28px 0;
+  border: 1px solid var(--sage);
+}
+.streak-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.streak-big { font-family: 'Cinzel', serif; font-size: 3.5rem; font-weight: 700; color: var(--charcoal); line-height: 1; }
+.streak-label h4 { font-family: 'Source Sans Pro', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--charcoal); }
+.streak-label p  { font-family: 'Source Sans Pro', sans-serif; font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+.rule-list { list-style: none; }
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(120,160,48,0.18);
+  font-size: 0.92rem;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+.rule-item:last-child { border-bottom: none; }
+.rule-icon {
+  width: 36px; height: 36px; min-width: 36px;
+  background: var(--white);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+.no-screenshot {
+  display: inline-block;
+  background: var(--rose);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.streak-note {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+
+/* =========================================
+   MY PIECE TAB
+   ========================================= */
+.big-q {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.65rem);
+  color: var(--charcoal);
+  line-height: 1.35;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.big-answer {
+  font-family: 'Trirong', serif;
+  font-style: italic;
+  font-size: 1.55rem;
+  color: var(--rose);
+  display: block;
+  margin-bottom: 28px;
+}
+.yes-list { list-style: none; margin-bottom: 24px; }
+.yes-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--sage-tint);
+  font-size: 0.96rem;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+.yes-item:last-child { border-bottom: none; }
+.yes-mark {
+  width: 22px; height: 22px; min-width: 22px;
+  background: var(--sage);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.scope-block {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin: 14px 0;
+  border: 1px solid var(--sage-tint);
+}
+.scope-block.yes-scope { border-left: 4px solid var(--sage); }
+.scope-block.not-scope { border-left: 4px solid var(--text-muted); }
+.scope-lbl {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 10px;
+}
+.scope-block.yes-scope .scope-lbl { color: var(--sage-dark); }
+.scope-block.not-scope .scope-lbl { color: var(--text-muted); }
+.unsure-box {
+  background: var(--blush);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-top: 28px;
+  text-align: center;
+  border: 1px solid rgba(232,96,120,0.2);
+}
+.unsure-box p { font-size: 0.98rem; color: var(--charcoal); line-height: 1.7; margin: 0; }
+.unsure-box strong { color: var(--rose); }
+
+/* =========================================
+   FALLING BEHIND TAB
+   ========================================= */
+.ok-list { list-style: none; }
+.ok-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(168,184,128,0.4);
+  animation: fadeSlideIn 0.4s ease backwards;
+}
+.ok-item:last-child { border-bottom: none; }
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.ok-dot {
+  width: 14px; height: 14px; min-width: 14px;
+  background: var(--rose);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(232,96,120,0.14);
+  margin-top: 7px;
+}
+.ok-text { font-size: 0.97rem; color: var(--text-body); line-height: 1.72; }
+.ok-text strong {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  display: block;
+  margin-bottom: 4px;
+}
+.ok-closing {
+  background: var(--charcoal);
+  border-radius: 18px;
+  padding: 36px 32px;
+  text-align: center;
+  margin-top: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.ok-closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(168,184,128,0.1) 0%, transparent 60%);
+}
+.ok-closing-title { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--sage); margin-bottom: 12px; position: relative; }
+.ok-closing p { font-family: 'Trirong', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.65); margin: 0; line-height: 1.7; position: relative; }
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 580px) {
+  .analogy-grid  { grid-template-columns: 1fr; }
+  .covers-row    { grid-template-columns: 1fr; }
+  .pillar-grid   { grid-template-columns: 1fr; }
+  .day-grid      { grid-template-columns: 1fr 1fr; }
+  .prize-card-new { flex-direction: column; align-items: flex-start; }
+  .prize-card-existing { padding: 32px 24px; }
+  .tracker-btns  { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     BOTANICAL LAYER — VISIBLE & ANIMATED
+     ========================================== -->
+<div class="botanical-layer" aria-hidden="true">
+
+  <!-- TOP LEFT cluster -->
+  <div class="bot-cluster tl">
+    <svg width="240" height="240" viewBox="0 0 240 240" fill="none">
+      <ellipse cx="55" cy="90"  rx="10" ry="30" fill="#A8B880" opacity="0.65" transform="rotate(-35 55 90)"/>
+      <ellipse cx="78" cy="62"  rx="8"  ry="24" fill="#78A030" opacity="0.55" transform="rotate(-55 78 62)"/>
+      <ellipse cx="36" cy="112" rx="9"  ry="26" fill="#A8B880" opacity="0.60" transform="rotate(-18 36 112)"/>
+      <ellipse cx="95" cy="78"  rx="7"  ry="20" fill="#c8d4a0" opacity="0.50" transform="rotate(-48 95 78)"/>
+      <ellipse cx="65" cy="125" rx="7"  ry="19" fill="#78A030" opacity="0.48" transform="rotate(5 65 125)"/>
+      <ellipse cx="22" cy="68"  rx="6"  ry="18" fill="#A8B880" opacity="0.45" transform="rotate(-70 22 68)"/>
+      <circle cx="85" cy="45"  r="10"  fill="#E86078" opacity="0.22"/>
+      <circle cx="105" cy="60" r="7"   fill="#E83C88" opacity="0.18"/>
+    </svg>
+  </div>
+
+  <!-- TOP RIGHT cluster -->
+  <div class="bot-cluster tr">
+    <svg width="240" height="240" viewBox="0 0 240 240" fill="none">
+      <ellipse cx="185" cy="90"  rx="10" ry="30" fill="#A8B880" opacity="0.62" transform="rotate(35 185 90)"/>
+      <ellipse cx="162" cy="62"  rx="8"  ry="24" fill="#78A030" opacity="0.55" transform="rotate(55 162 62)"/>
+      <ellipse cx="204" cy="112" rx="9"  ry="26" fill="#A8B880" opacity="0.58" transform="rotate(18 204 112)"/>
+      <ellipse cx="145" cy="78"  rx="7"  ry="20" fill="#c8d4a0" opacity="0.48" transform="rotate(48 145 78)"/>
+      <ellipse cx="175" cy="128" rx="7"  ry="19" fill="#78A030" opacity="0.45" transform="rotate(-8 175 128)"/>
+      <circle  cx="155" cy="45"  r="10"  fill="#E86078" opacity="0.20"/>
+      <circle  cx="135" cy="62"  r="7"   fill="#E83C88" opacity="0.16"/>
+    </svg>
+  </div>
+
+  <!-- BOTTOM LEFT cluster -->
+  <div class="bot-cluster bl">
+    <svg width="220" height="220" viewBox="0 0 220 220" fill="none">
+      <ellipse cx="42" cy="135"  rx="9"  ry="28" fill="#A8B880" opacity="0.60" transform="rotate(-28 42 135)"/>
+      <ellipse cx="68" cy="112"  rx="7"  ry="22" fill="#78A030" opacity="0.52" transform="rotate(-48 68 112)"/>
+      <ellipse cx="25" cy="162"  rx="8"  ry="24" fill="#c8d4a0" opacity="0.55" transform="rotate(-12 25 162)"/>
+      <ellipse cx="85" cy="148"  rx="6"  ry="17" fill="#A8B880" opacity="0.48" transform="rotate(-62 85 148)"/>
+      <circle  cx="72" cy="180"  r="11"  fill="#E86078" opacity="0.22"/>
+    </svg>
+  </div>
+
+  <!-- BOTTOM RIGHT cluster -->
+  <div class="bot-cluster br">
+    <svg width="220" height="220" viewBox="0 0 220 220" fill="none">
+      <ellipse cx="178" cy="135" rx="9"  ry="28" fill="#A8B880" opacity="0.58" transform="rotate(28 178 135)"/>
+      <ellipse cx="152" cy="112" rx="7"  ry="22" fill="#78A030" opacity="0.50" transform="rotate(48 152 112)"/>
+      <ellipse cx="195" cy="162" rx="8"  ry="24" fill="#c8d4a0" opacity="0.53" transform="rotate(12 195 162)"/>
+      <ellipse cx="135" cy="148" rx="6"  ry="17" fill="#A8B880" opacity="0.46" transform="rotate(62 135 148)"/>
+      <circle  cx="148" cy="182" r="11"  fill="#E86078" opacity="0.20"/>
+    </svg>
+  </div>
+
+  <!-- MID LEFT -->
+  <div class="bot-cluster mc">
+    <svg width="100" height="200" viewBox="0 0 100 200" fill="none">
+      <ellipse cx="30" cy="80"  rx="7"  ry="22" fill="#A8B880" opacity="0.45" transform="rotate(-20 30 80)"/>
+      <ellipse cx="18" cy="110" rx="6"  ry="18" fill="#78A030" opacity="0.40" transform="rotate(-40 18 110)"/>
+      <ellipse cx="40" cy="140" rx="7"  ry="20" fill="#c8d4a0" opacity="0.38" transform="rotate(-5 40 140)"/>
+    </svg>
+  </div>
+
+  <!-- MID RIGHT -->
+  <div class="bot-cluster mr">
+    <svg width="100" height="200" viewBox="0 0 100 200" fill="none">
+      <ellipse cx="70" cy="80"  rx="7"  ry="22" fill="#A8B880" opacity="0.43" transform="rotate(20 70 80)"/>
+      <ellipse cx="82" cy="110" rx="6"  ry="18" fill="#78A030" opacity="0.38" transform="rotate(40 82 110)"/>
+      <ellipse cx="60" cy="140" rx="7"  ry="20" fill="#c8d4a0" opacity="0.36" transform="rotate(5 60 140)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ==========================================
+     HEADER
+     ========================================== -->
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <div class="header-text">
+      <div class="logo-badge">
+        <img src="images/LRNF Logo.png" class="logo-img" alt="Learn New Repertoire Faster 28 Day Challenge Logo">
+      </div>
+      <p class="header-sub">Start Here Guide</p>
+    </div>
+
+    <!-- Piano Illustration — save the uploaded image as "lnrf-piano-illustration.png" in the same folder as this file -->
+    <div class="piano-wrap" aria-hidden="true">
+      <img src="images/Pink piano illustration.png" alt="Watercolor illustration of a pink grand piano with a plant and a cat">
+    </div>
+  </div>
+</header>
+
+<!-- ==========================================
+     TAB NAVIGATION
+     ========================================== -->
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" onclick="showTab('start')" role="tab" aria-selected="true">Start Here</button>
+  <button class="tab-btn"        onclick="showTab('what')"  role="tab">About the Challenge</button>
+  <button class="tab-btn"        onclick="showTab('prize')" role="tab">Win a Prize</button>
+  <button class="tab-btn"        onclick="showTab('piece')" role="tab">My Piece</button>
+  <button class="tab-btn"        onclick="showTab('ok')"    role="tab">Falling Behind</button>
+</nav>
+
+<!-- ==========================================
+     TAB 1 — START HERE
+     ========================================== -->
+<section id="panel-start" class="tab-panel active" role="tabpanel">
+  <div class="panel-inner">
+
+    <span class="eyebrow">Welcome</span>
+    <h1 class="panel-title">You're in the<br><em>right place.</em></h1>
+    <p class="panel-subtitle">The Neuroscience-Based System for Learning Piano Pieces Faster</p>
+
+    <div class="divider" style="margin:0 0 28px;">✦</div>
+    <span class="eyebrow">Do these 2 things first</span>
+
+    <div class="steps-stack">
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Set up your tracker</h3>
+          <p>Click below to copy your Google Sheet tracker. Rename it something you'll recognize, save it somewhere easy to find, and you're ready to go.</p>
+          <div class="tracker-btns">
+            <a href="https://docs.google.com/spreadsheets/d/1PnDCQD34fl0PFDY-UybIeHv3PC4Xn1Di/copy" target="_blank" class="tracker-link">
+              📊 Copy your tracker
+            </a>
+            <a href="#" class="tracker-link secondary">
+              🖨️ Download the printable tracker
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Head to Day 1 and post your first check-in</h3>
+          <p>Find Day 1: Scoping the Territory in the sidebar. Read it, do the task, and post your comment. That's your first check-in on the streak.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="piece-note">
+      Not sure if your piece qualifies?
+      <button onclick="showTab('piece')">See the My Piece tab &rarr;</button>
+    </div>
+
+    <div class="roadmap-block">
+      <h3>Your Week 1 Roadmap</h3>
+      <p class="roadmap-sub">We build the skills and install the system, one day at a time</p>
+      <div class="day-grid">
+        <div class="day-pill"><span class="dn">1</span><span class="dl">Scoping the Territory (Mapping)</span></div>
+        <div class="day-pill"><span class="dn">2</span><span class="dl">$100 Tempo &amp; 3-Break-3</span></div>
+        <div class="day-pill"><span class="dn">3</span><span class="dl">Personal Pattern Recognition</span></div>
+        <div class="day-pill"><span class="dn">4</span><span class="dl">Handling Leaps Correctly</span></div>
+        <div class="day-pill"><span class="dn">5</span><span class="dl">Speed Techniques</span></div>
+        <div class="day-pill"><span class="dn">6</span><span class="dl">Practice Integration</span></div>
+        <div class="day-pill"><span class="dn">7</span><span class="dl">Practice Planning &amp; Goals</span></div>
+      </div>
+      <div class="days-later">
+        <strong>Days 8&ndash;28:</strong> We build on Week 1 skills using Spaced Repetition, Variable Practice, and Mental Practice to make your progress stick &mdash; and handle the days when life gets in the way.
+      </div>
+    </div>
+
+    <div class="quick-nav">
+      <span class="eyebrow">Also in this guide</span>
+      <div class="nav-chips">
+        <button class="nav-chip" onclick="showTab('what')">About the Challenge</button>
+        <button class="nav-chip" onclick="showTab('prize')">How to Win a Prize</button>
+        <button class="nav-chip" onclick="showTab('piece')">My Piece</button>
+        <button class="nav-chip" onclick="showTab('ok')">Falling Behind</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================
+     TAB 2 — ABOUT THE CHALLENGE
+     ========================================== -->
+<section id="panel-what" class="tab-panel" role="tabpanel">
+  <div class="panel-inner">
+
+    <span class="eyebrow">Overview</span>
+    <h1 class="panel-title">About<br><em>the Challenge</em></h1>
+    <p class="body-text">This challenge takes you from the first time you open a score to the day you can play through at your target tempo. It is a neuroscience-based system, not a collection of tips.</p>
+
+    <!-- BATCH / PASSAGE / CHUNK ANALOGY -->
+    <div class="analogy-card">
+      <span class="analogy-label">Key Vocabulary &mdash; Read This First</span>
+      <h3>Batches, Passages, and Chunks</h3>
+      <p style="font-size:0.9rem;color:var(--text-muted);font-style:italic;margin-bottom:4px;">These three words come up throughout the challenge. Think of it like a meal:</p>
+      <div class="analogy-grid">
+        <div class="analogy-item">
+          <div class="a-icon">🍽️</div>
+          <div class="a-term">Batch</div>
+          <div class="a-def">A full meal &mdash; a collection of passages you're working on</div>
+        </div>
+        <div class="analogy-item">
+          <div class="a-icon">🥗</div>
+          <div class="a-term">Passage</div>
+          <div class="a-def">One dish &mdash; a section of your piece (a phrase or measure group)</div>
+        </div>
+        <div class="analogy-item">
+          <div class="a-icon">🥄</div>
+          <div class="a-term">Chunk</div>
+          <div class="a-def">The bites you take &mdash; the tiny units you practice within a passage</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider">✦</div>
+
+    <div class="covers-row">
+      <div class="covers-box yes">
+        <span class="covers-label">This challenge covers</span>
+        <ul class="item-list">
+          <li><span class="mk">✓</span>Learning a passage from scratch</li>
+          <li><span class="mk">✓</span>Cleaning up a passage you know halfway</li>
+          <li><span class="mk">✓</span>Building speed and accuracy in specific sections</li>
+          <li><span class="mk">✓</span>Identifying exactly what is stopping you and fixing it</li>
+        </ul>
+      </div>
+      <div class="covers-box not">
+        <span class="covers-label">Not covered</span>
+        <ul class="item-list">
+          <li><span class="mk">○</span>Sightreading</li>
+          <li><span class="mk">○</span>Performance prep (nerves, stagecraft, memorization for the stage)</li>
+          <li><span class="mk">○</span>Music theory</li>
+          <li><span class="mk">○</span>Playing for fun without a specific goal</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider">✦</div>
+
+    <span class="eyebrow">The Framework</span>
+    <h2 class="section-head">The 4 Pillars of Learning New Repertoire Faster</h2>
+
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">📖</div>
+        <div class="pillar-name">Meaning</div>
+        <p class="pillar-desc">See the sections fast and build musicality from day one. You work on music that matters to you.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🎵</div>
+        <div class="pillar-name">Flow</div>
+        <p class="pillar-desc">Train leaps and speed early so your music flows without pauses, even in the big jumps. Challenging but doable.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">🧠</div>
+        <div class="pillar-name">Retention</div>
+        <p class="pillar-desc">Use tiny chunks, mental play, and optimal break schedules so your progress moves into long-term memory.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">⏱️</div>
+        <div class="pillar-name">Focus</div>
+        <p class="pillar-desc">Stop mindless repeats and steer each session so every minute counts. Short and intentional beats long and unfocused.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================
+     TAB 3 — WIN A PRIZE
+     ========================================== -->
+<section id="panel-prize" class="tab-panel" role="tabpanel">
+  <div class="panel-inner">
+
+    <div class="prize-intro">
+      <span class="eyebrow">The Reward</span>
+      <span class="prize-script">When you finish the 28-day streak&hellip;</span>
+      <h1 class="panel-title">How to <em>Win a Prize</em></h1>
+    </div>
+
+    <!-- New members — compact -->
+    <div class="prize-card-new">
+      <div class="prize-card-new-text">
+        <span class="prize-tag">For New Members</span>
+        <h3>Full Refund on Your First Month</h3>
+        <ul class="prize-steps-list">
+          <li><span class="sn">1</span>Join with the 7-day free trial</li>
+          <li><span class="sn">2</span>Successfully complete the 28-day streak</li>
+          <li><span class="sn">3</span>Get a full refund of your first month's membership fee</li>
+        </ul>
+      </div>
+      <div class="prize-medallion-sm">
+        <span class="prize-big-sm">100%</span>
+        <span class="prize-small-sm">REFUND</span>
+      </div>
+    </div>
+
+    <!-- Existing members — LARGE and dominant -->
+    <div class="prize-card-existing">
+      <span class="prize-tag">For Existing Members</span>
+      <h3>Win a Free 30-Minute Private Lesson with Rebecca</h3>
+      <p>Complete the 28-day streak and you're eligible to win. The winner is chosen by engagement &mdash; the more you show up and participate, the better your chances.</p>
+      <div class="prize-medallion-lg">
+        <span class="prize-big-lg">30</span>
+        <span class="prize-small-lg">MIN LESSON</span>
+      </div>
+    </div>
+
+    <div class="streak-box">
+      <div class="streak-header">
+        <span class="streak-big">28</span>
+        <div class="streak-label">
+          <h4>Streak Rules</h4>
+          <p>One check-in per calendar day, 28 days in a row</p>
+        </div>
+      </div>
+      <ul class="rule-list">
+        <li class="rule-item">
+          <span class="rule-icon">📅</span>
+          <span>One check-in per calendar day for 28 days in a row</span>
+        </li>
+        <li class="rule-item">
+          <span class="rule-icon">🌍</span>
+          <span>Based on your local date &mdash; post anytime during that day</span>
+        </li>
+        <li class="rule-item">
+          <span class="rule-icon">✅</span>
+          <span>Still counts even if you couldn't practice that day</span>
+        </li>
+        <li class="rule-item">
+          <span class="rule-icon">💬</span>
+          <div>
+            <div>Post a comment on each day's lesson, then save the link</div>
+            <span class="no-screenshot">No screenshot required</span>
+          </div>
+        </li>
+      </ul>
+      <p class="streak-note">The streak is about showing up and documenting your process, not about perfect practice sessions.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================
+     TAB 4 — MY PIECE
+     ========================================== -->
+<section id="panel-piece" class="tab-panel" role="tabpanel">
+  <div class="panel-inner">
+
+    <span class="eyebrow">A Question People Often Have</span>
+    <p class="big-q">Does &ldquo;Learn New Repertoire Faster&rdquo; mean I have to work on a brand new piece?</p>
+    <span class="big-answer">No. Here is what qualifies.</span>
+
+    <ul class="yes-list">
+      <li class="yes-item"><span class="yes-mark">✓</span>A piece you have been working on for months</li>
+      <li class="yes-item"><span class="yes-mark">✓</span>A piece you know halfway but want cleaner and faster</li>
+      <li class="yes-item"><span class="yes-mark">✓</span>A piece you are re-learning after a long break</li>
+      <li class="yes-item"><span class="yes-mark">✓</span>A piece you can play through, but not at your target tempo yet</li>
+    </ul>
+
+    <div class="scope-block yes-scope">
+      <span class="scope-lbl">The challenge will teach you the best ways to practice</span>
+      <p class="body-text" style="margin:0;">Everything from the first time you open the score to the day you can play it at your target tempo. Any stage of learning is fine &mdash; not just pieces you have never touched before.</p>
+    </div>
+
+    <div class="scope-block not-scope" style="margin-top:14px;">
+      <span class="scope-lbl">Not covered in this challenge</span>
+      <ul class="item-list">
+        <li><span class="mk">○</span>Sightreading (playing a piece for the first time with no preparation)</li>
+        <li><span class="mk">○</span>Performing (managing nerves, memorization for the stage, stagecraft)</li>
+        <li><span class="mk">○</span>Music theory study</li>
+        <li><span class="mk">○</span>Playing for fun with no specific goal</li>
+      </ul>
+    </div>
+
+    <div class="unsure-box">
+      <p><strong>If you are still unsure:</strong><br>Is there anything in this piece that doesn't sound how you want it to? If yes &mdash; that is exactly what this challenge is for.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================
+     TAB 5 — FALLING BEHIND
+     ========================================== -->
+<section id="panel-ok" class="tab-panel" role="tabpanel">
+  <div class="panel-inner">
+
+    <span class="eyebrow">A Note Before You Begin</span>
+    <h1 class="panel-title">If you're feeling<br><em>behind or unsure.</em></h1>
+    <p class="panel-subtitle">Read this. It applies to you.</p>
+
+    <ul class="ok-list">
+      <li class="ok-item" style="animation-delay:0.05s">
+        <div class="ok-dot"></div>
+        <div class="ok-text">
+          <strong>It is OK if you didn't practice today.</strong>
+          Post your check-in anyway. Showing up counts.
+        </div>
+      </li>
+      <li class="ok-item" style="animation-delay:0.10s">
+        <div class="ok-dot"></div>
+        <div class="ok-text">
+          <strong>It is OK if you only identified the problem without fixing it.</strong>
+          Noticing is the first step.
+        </div>
+      </li>
+      <li class="ok-item" style="animation-delay:0.15s">
+        <div class="ok-dot"></div>
+        <div class="ok-text">
+          <strong>It is OK if your tracker shows very little activity.</strong>
+          The tracker shows what you need to work on, not how bad you are.
+        </div>
+      </li>
+      <li class="ok-item" style="animation-delay:0.20s">
+        <div class="ok-dot"></div>
+        <div class="ok-text">
+          <strong>It is OK if you are working on a piece you have had for years.</strong>
+          That counts.
+        </div>
+      </li>
+      <li class="ok-item" style="animation-delay:0.25s">
+        <div class="ok-dot"></div>
+        <div class="ok-text">
+          <strong>It is OK no matter what level you're at.</strong>
+          This system works whether you're intermediate, advanced, or anywhere in between. Rebecca or someone in the group will help you.
+        </div>
+      </li>
+      <li class="ok-item" style="animation-delay:0.30s">
+        <div class="ok-dot"></div>
+        <div class="ok-text">
+          <strong>It is OK if your progress feels slow.</strong>
+          Slow, focused practice is what makes things stick. That is the whole point.
+        </div>
+      </li>
+    </ul>
+
+    <div class="ok-closing">
+      <div class="ok-closing-title">You belong here.</div>
+      <p>Every person in this community started where you are.<br>Show up, post your check-in, and let the system do its work.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================
+     JAVASCRIPT
+     ========================================== -->
+<script>
+const TABS = ['start','what','prize','piece','ok'];
+
+function showTab(id) {
+  const btns   = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  const idx    = TABS.indexOf(id);
+
+  btns.forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+    b.setAttribute('aria-selected', i === idx);
+  });
+  panels.forEach((p, i) => p.classList.toggle('active', i === idx));
+
+  if (btns[idx]) btns[idx].scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
